@@ -21,7 +21,7 @@ jobs:
 
     # Publish Blazor project to the release folder.
     - name: Publish .NET Project
-      run: dotnet publish TextManipulator.csproj -c Release -o release --nologo
+      run: dotnet publish TextManipulator/TextManipulator.csproj -c Release -o release --nologo
 
     # Change the base-tag in index.html from '/' to 'TextManipulator' to match GitHub Pages repository subdirectory.
     - name: Change base-tag in index.html from / to TextManipulator
