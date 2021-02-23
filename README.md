@@ -1,1 +1,3 @@
 # TextManipulator
+
+Blazor WebAssembly app
