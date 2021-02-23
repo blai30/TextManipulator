@@ -5,15 +5,21 @@ namespace TextManipulator.Pages
     public partial class Numbers
     {
         private bool Loading { get; set; } = false;
-        private int InputNumber { get; set; }
+        private bool InputIsBlank => InputNumber == null;
+        private int? InputNumber { get; set; }
         private string OutputText { get; set; }
         private NumbersModel Model { get; set; } = new();
 
         private void Transform()
         {
+            if (InputNumber == null)
+            {
+                return;
+            }
+
             Loading = true;
 
-            int input = InputNumber;
+            int input = (int) InputNumber;
             string result = Model.Notation switch
             {
                 Notation.Words => input.ToWords(),
