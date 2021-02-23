@@ -5,16 +5,17 @@
 <Space Direction="vertical"
        Style="width: 100%;">
     <SpaceItem>
-        <Input @bind-Value="InputNumber" />
+        <AntDesign.InputNumber Min="-2147483648" Max="2147483647" Style="width: 100%;" @bind-Value="InputNumber" />
     </SpaceItem>
 
     <SpaceItem>
         <Form
             Layout="@(FormLayout.Vertical)"
-            Loading="Loading">
+            Loading="Loading"
+            Model="@Model">
 
             <FormItem>
-                <RadioGroup ButtonStyle="solid" @bind-Value="Notation">
+                <RadioGroup ButtonStyle="solid" @bind-Value="Model.Notation">
                     <Radio RadioButton Value="@(Notation.Digits)">Digits</Radio>
                     <Radio RadioButton Value="@(Notation.Words)">Words</Radio>
                     <Radio RadioButton Value="@(Notation.OrdinalWords)">Ordinal Words</Radio>

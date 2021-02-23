@@ -5,25 +5,20 @@ namespace TextManipulator.Pages
     public partial class Numbers
     {
         private bool Loading { get; set; } = false;
-        private string InputNumber { get; set; } = string.Empty;
-        private string OutputText { get; set; } = string.Empty;
-        private Notation Notation { get; set; } = Notation.Digits;
+        private int InputNumber { get; set; }
+        private string OutputText { get; set; }
+        private NumbersModel Model { get; set; } = new();
 
         private void Transform()
         {
             Loading = true;
 
-            if (!int.TryParse(InputNumber, out int input))
-            {
-                return;
-            }
-            string result = string.Empty;
-
-            result = Notation switch
+            int input = InputNumber;
+            string result = Model.Notation switch
             {
                 Notation.Words => input.ToWords(),
                 Notation.OrdinalWords => input.ToOrdinalWords(),
-                Notation.RomanNumerals => input.ToRoman(),
+                Notation.RomanNumerals => input < 4000 && input > 0 ? input.ToRoman() : "Input must be >0 and <4000",
                 Notation.Metrics => input.ToMetric(),
                 _ => input.ToString()
             };
@@ -31,6 +26,11 @@ namespace TextManipulator.Pages
             OutputText = result;
             Loading = false;
         }
+    }
+
+    public class NumbersModel
+    {
+        public Notation Notation { get; set; } = Notation.Digits;
     }
 
     public enum Notation
