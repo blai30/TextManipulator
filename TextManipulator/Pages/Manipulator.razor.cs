@@ -7,10 +7,11 @@ namespace TextManipulator.Pages
     public partial class Manipulator
     {
         private bool Loading { get; set; } = false;
-        private string InputText { get; set; }
-        private string OutputText { get; set; }
-        private FormModel Model { get; set; } = new();
-
+        private string InputText { get; set; } = string.Empty;
+        private string OutputText { get; set; } = string.Empty;
+        private TextCase TextCase { get; set; } = TextCase.Unchanged;
+        private bool ClapItUp { get; set; } = false;
+        private int? CharLimit { get; set; } = null;
         private Random Random { get; set; } = new(new Guid().GetHashCode());
 
         private void Manipulate()
@@ -29,12 +30,12 @@ namespace TextManipulator.Pages
             var regex = new Regex(@"\s+");
             input = regex.Replace(input, " ");
 
-            if (Model.ClapItUp)
+            if (ClapItUp)
             {
                 input = input.Replace(" ", " 👏 ");
             }
 
-            input = Model.TextCase switch
+            input = TextCase switch
             {
                 TextCase.Unchanged => input,
                 TextCase.UpperCase => input.ToUpper(),
@@ -49,9 +50,9 @@ namespace TextManipulator.Pages
                 _ => input
             };
 
-            if (Model.CharLimit != null)
+            if (CharLimit != null)
             {
-                input = input.Truncate((int) Model.CharLimit, "");
+                input = input.Truncate((int) CharLimit, "");
             }
 
             OutputText = input;
@@ -79,13 +80,6 @@ namespace TextManipulator.Pages
 
             return result;
         }
-    }
-
-    public class FormModel
-    {
-        public TextCase TextCase { get; set; } = TextCase.Unchanged;
-        public bool ClapItUp { get; set; }
-        public int? CharLimit { get; set; }
     }
 
     public enum TextCase

@@ -5,17 +5,16 @@
 <Space Direction="vertical"
        Style="width: 100%;">
     <SpaceItem>
-        <TextArea Placeholder="Input" MinRows="4" MaxRows="4" @bind-Value="@InputText" />
+        <TextArea Placeholder="Input" MinRows="4" MaxRows="4" @bind-Value="InputText" />
     </SpaceItem>
 
     <SpaceItem>
         <Form
             Layout="@(FormLayout.Vertical)"
-            Loading="Loading"
-            Model="@Model">
+            Loading="Loading">
 
             <FormItem>
-                <RadioGroup ButtonStyle="solid" @bind-Value="@Model.TextCase">
+                <RadioGroup ButtonStyle="solid" @bind-Value="TextCase">
                     <Radio RadioButton Value="@(TextCase.Unchanged)">Unchanged</Radio>
                     <Radio RadioButton Value="@(TextCase.UpperCase)">UPPER CASE</Radio>
                     <Radio RadioButton Value="@(TextCase.LowerCase)">lower case</Radio>
@@ -30,13 +29,13 @@
             </FormItem>
 
             <FormItem>
-                <Checkbox @bind-Value="@Model.ClapItUp">
+                <Checkbox @bind-Value="ClapItUp">
                     Clap 👏 it 👏 up!
                 </Checkbox>
             </FormItem>
 
             <FormItem Label="Character Limit">
-                <AntDesign.InputNumber @bind-Value="Model.CharLimit" Max="2147483647" />
+                <AntDesign.InputNumber @bind-Value="CharLimit" Max="2147483647" />
             </FormItem>
 
             <FormItem>
@@ -46,6 +45,6 @@
     </SpaceItem>
 
     <SpaceItem>
-        <TextArea Placeholder="Output" MinRows="4" MaxRows="4" @bind-Value="@OutputText" />
+        <TextArea Placeholder="Output" MinRows="4" MaxRows="4" @bind-Value="OutputText" />
     </SpaceItem>
 </Space>
