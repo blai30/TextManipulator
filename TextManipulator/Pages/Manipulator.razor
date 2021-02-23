@@ -13,17 +13,17 @@
         <Form
             Layout="@(FormLayout.Vertical)"
             Loading="Loading"
-            Model="@model">
+            Model="@Model">
 
             <FormItem>
-                <RadioGroup ButtonStyle="solid" @bind-Value="@model.TextCase">
+                <RadioGroup ButtonStyle="solid" @bind-Value="@Model.TextCase">
                     <Radio RadioButton Value="@(TextCase.Unchanged)">Unchanged</Radio>
                     <Radio RadioButton Value="@(TextCase.UpperCase)">UPPER CASE</Radio>
                     <Radio RadioButton Value="@(TextCase.LowerCase)">lower case</Radio>
-                    <Radio RadioButton Value="@(TextCase.CamelCase)">camelCase</Radio>
-                    <Radio RadioButton Value="@(TextCase.PascalCase)">PascalCase</Radio>
                     <Radio RadioButton Value="@(TextCase.SentenceCase)">Sentence case</Radio>
                     <Radio RadioButton Value="@(TextCase.TitleCase)">Title Case</Radio>
+                    <Radio RadioButton Value="@(TextCase.CamelCase)">camelCase</Radio>
+                    <Radio RadioButton Value="@(TextCase.PascalCase)">PascalCase</Radio>
                     <Radio RadioButton Value="@(TextCase.SnakeCase)">snake_case</Radio>
                     <Radio RadioButton Value="@(TextCase.KebabCase)">kebab-case</Radio>
                     <Radio RadioButton Value="@(TextCase.RandomCase)">rAnDOm caSe</Radio>
@@ -31,13 +31,13 @@
             </FormItem>
 
             <FormItem>
-                <Checkbox @bind-Value="@model.ClapItUp">
+                <Checkbox @bind-Value="@Model.ClapItUp">
                     Clap 👏 it 👏 up!
                 </Checkbox>
             </FormItem>
 
             <FormItem Label="Character Limit">
-                <AntDesign.InputNumber @bind-Value="model.CharLimit" Max="2147483647" />
+                <AntDesign.InputNumber @bind-Value="Model.CharLimit" Max="2147483647" />
             </FormItem>
 
             <FormItem>
@@ -56,26 +56,26 @@
     private bool Loading { get; set; } = false;
     private string InputText { get; set; }
     private string OutputText { get; set; }
-    private Model model { get; set; } = new Model();
+    private FormModel Model { get; set; } = new();
 
     private Random Random { get; set; } = new(new Guid().GetHashCode());
 
-    public class Model
+    private class FormModel
     {
         public TextCase TextCase { get; set; } = TextCase.Unchanged;
         public bool ClapItUp { get; set; }
         public int? CharLimit { get; set; }
     }
 
-    public enum TextCase
+    private enum TextCase
     {
         Unchanged,
         UpperCase,
         LowerCase,
-        CamelCase,
-        PascalCase,
         SentenceCase,
         TitleCase,
+        CamelCase,
+        PascalCase,
         SnakeCase,
         KebabCase,
         RandomCase
@@ -97,12 +97,12 @@
         var regex = new Regex(@"\s+");
         input = regex.Replace(input, " ");
 
-        if (model.ClapItUp)
+        if (Model.ClapItUp)
         {
             input = input.Replace(" ", " 👏 ");
         }
 
-        input = model.TextCase switch
+        input = Model.TextCase switch
         {
             TextCase.Unchanged => input,
             TextCase.UpperCase => input.ToUpper(),
@@ -117,9 +117,9 @@
             _ => input
         };
 
-        if (model.CharLimit != null)
+        if (Model.CharLimit != null)
         {
-            input = input.Truncate((int) model.CharLimit, "");
+            input = input.Truncate((int) Model.CharLimit, "");
         }
 
         OutputText = input;
@@ -135,12 +135,13 @@
             foreach (char c in input)
             {
                 int next = Random.Next(2);
+
                 result += next switch
                 {
                     0 => char.ToUpper(c).ToString(),
                     1 => char.ToLower(c).ToString(),
                     _ => c.ToString()
-                    };
+                };
             }
         } while (result == input);
 
