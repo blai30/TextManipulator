@@ -2,35 +2,38 @@
 
 <h3>Numbers</h3>
 
-<Space Direction="vertical"
-       Style="width: 100%;">
-    <SpaceItem>
-        <AntDesign.InputNumber Min="-2147483648" Max="2147483647" Style="width: 100%;" @bind-Value="InputNumber" />
-    </SpaceItem>
+<Field>
+    <NumericEdit Placeholder="Input" TValue="int?" @bind-Value="@InputNumber" />
+</Field>
 
-    <SpaceItem>
-        <Form
-            Layout="@(FormLayout.Vertical)"
-            Loading="Loading"
-            Model="@Model">
+<Form Model="@Model">
+    <Field>
+        <RadioGroup
+            TValue="Notation"
+            Name="notation"
+            Buttons="true"
+            @bind-CheckedValue="@Model.Notation">
+            <Radio Value="@(Notation.Digits)">Digits</Radio>
+            <Radio Value="@(Notation.Words)">Words</Radio>
+            <Radio Value="@(Notation.OrdinalWords)">Ordinal Words</Radio>
+            <Radio Value="@(Notation.RomanNumerals)">Roman Numerals</Radio>
+            <Radio Value="@(Notation.Metrics)">Metrics</Radio>
+        </RadioGroup>
+    </Field>
 
-            <FormItem>
-                <RadioGroup ButtonStyle="solid" @bind-Value="Model.Notation">
-                    <Radio RadioButton Value="@(Notation.Digits)">Digits</Radio>
-                    <Radio RadioButton Value="@(Notation.Words)">Words</Radio>
-                    <Radio RadioButton Value="@(Notation.OrdinalWords)">Ordinal Words</Radio>
-                    <Radio RadioButton Value="@(Notation.RomanNumerals)">Roman Numerals</Radio>
-                    <Radio RadioButton Value="@(Notation.Metrics)">Metrics</Radio>
-                </RadioGroup>
-            </FormItem>
+    <Field>
+        <Button
+            Color="Color.Primary"
+            Block="true"
+            Size="Size.Large"
+            Clicked="@Transform"
+            Disabled="@InputIsBlank"
+            Loading="@Loading">
+            Transform
+        </Button>
+    </Field>
+</Form>
 
-            <FormItem>
-                <Button Size="large" Type="primary" Block @onclick="Transform">Transform</Button>
-            </FormItem>
-        </Form>
-    </SpaceItem>
-
-    <SpaceItem>
-        <TextArea Placeholder="Output" MinRows="4" MaxRows="4" @bind-Value="OutputText" />
-    </SpaceItem>
-</Space>
+<Field>
+    <MemoEdit Placeholder="Output" Rows="4" @bind-Text="@OutputText" />
+</Field>

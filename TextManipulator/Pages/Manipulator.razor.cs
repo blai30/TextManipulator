@@ -7,6 +7,7 @@ namespace TextManipulator.Pages
     public partial class Manipulator
     {
         private bool Loading { get; set; } = false;
+        private bool InputIsBlank => string.IsNullOrWhiteSpace(InputText);
         private string InputText { get; set; }
         private string OutputText { get; set; }
         private ManipulatorModel Model { get; set; } = new();
