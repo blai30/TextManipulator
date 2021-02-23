@@ -9,8 +9,7 @@ namespace TextManipulator.Pages
         private bool Loading { get; set; } = false;
         private string InputText { get; set; }
         private string OutputText { get; set; }
-        private FormModel Model { get; set; } = new();
-
+        private ManipulatorModel Model { get; set; } = new();
         private Random Random { get; set; } = new(new Guid().GetHashCode());
 
         private void Manipulate()
@@ -81,11 +80,11 @@ namespace TextManipulator.Pages
         }
     }
 
-    public class FormModel
+    public class ManipulatorModel
     {
         public TextCase TextCase { get; set; } = TextCase.Unchanged;
-        public bool ClapItUp { get; set; }
-        public int? CharLimit { get; set; }
+        public bool ClapItUp { get; set; } = false;
+        public int? CharLimit { get; set; } = null;
     }
 
     public enum TextCase

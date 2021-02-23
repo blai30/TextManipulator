@@ -5,7 +5,7 @@
 <Space Direction="vertical"
        Style="width: 100%;">
     <SpaceItem>
-        <TextArea Placeholder="Input" MinRows="4" MaxRows="4" @bind-Value="@InputText" />
+        <TextArea Placeholder="Input" MinRows="4" MaxRows="4" @bind-Value="InputText" />
     </SpaceItem>
 
     <SpaceItem>
@@ -15,7 +15,7 @@
             Model="@Model">
 
             <FormItem>
-                <RadioGroup ButtonStyle="solid" @bind-Value="@Model.TextCase">
+                <RadioGroup ButtonStyle="solid" @bind-Value="Model.TextCase">
                     <Radio RadioButton Value="@(TextCase.Unchanged)">Unchanged</Radio>
                     <Radio RadioButton Value="@(TextCase.UpperCase)">UPPER CASE</Radio>
                     <Radio RadioButton Value="@(TextCase.LowerCase)">lower case</Radio>
@@ -30,7 +30,7 @@
             </FormItem>
 
             <FormItem>
-                <Checkbox @bind-Value="@Model.ClapItUp">
+                <Checkbox @bind-Value="Model.ClapItUp">
                     Clap 👏 it 👏 up!
                 </Checkbox>
             </FormItem>
@@ -46,6 +46,6 @@
     </SpaceItem>
 
     <SpaceItem>
-        <TextArea Placeholder="Output" MinRows="4" MaxRows="4" @bind-Value="@OutputText" />
+        <TextArea Placeholder="Output" MinRows="4" MaxRows="4" @bind-Value="OutputText" />
     </SpaceItem>
 </Space>
