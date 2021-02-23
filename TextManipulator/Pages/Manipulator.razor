@@ -130,16 +130,19 @@
     {
         string result = string.Empty;
 
-        foreach (char c in input)
+        do
         {
-            int next = Random.Next(2);
-            result += next switch
+            foreach (char c in input)
             {
-                0 => char.ToUpper(c).ToString(),
-                1 => char.ToLower(c).ToString(),
-                _ => c.ToString()
-            };
-        }
+                int next = Random.Next(2);
+                result += next switch
+                {
+                    0 => char.ToUpper(c).ToString(),
+                    1 => char.ToLower(c).ToString(),
+                    _ => c.ToString()
+                    };
+            }
+        } while (result == input);
 
         return result;
     }
