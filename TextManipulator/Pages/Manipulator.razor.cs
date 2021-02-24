@@ -33,11 +33,6 @@ namespace TextManipulator.Pages
                 input = regex.Replace(input, " ");
             }
 
-            if (Model.ClapItUp)
-            {
-                input = input.Replace(" ", " 👏 ");
-            }
-
             input = Model.TextCase switch
             {
                 TextCase.Unchanged => input,
@@ -52,6 +47,11 @@ namespace TextManipulator.Pages
                 TextCase.RandomCase => RandomCase(input),
                 _ => input
             };
+
+            if (Model.ClapItUp)
+            {
+                input = input.Replace(" ", " 👏 ");
+            }
 
             if (Model.CharLimit != null)
             {
