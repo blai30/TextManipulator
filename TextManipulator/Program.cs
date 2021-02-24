@@ -3,9 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Blazorise;
-using Blazorise.AntDesign;
-using Blazorise.Icons.FontAwesome;
 
 namespace TextManipulator
 {
@@ -15,14 +12,8 @@ namespace TextManipulator
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-            // Add Blazorise.
-            builder.Services
-                .AddBlazorise(options =>
-                {
-                    options.ChangeTextOnKeyPress = true;
-                })
-                .AddAntDesignProviders()
-                .AddFontAwesomeIcons();
+            // Add AntDesign.
+            builder.Services.AddAntDesign();
 
             builder.RootComponents.Add<App>("#app");
             builder.Services.AddScoped(_ => new HttpClient
@@ -31,12 +22,6 @@ namespace TextManipulator
             });
 
             var host = builder.Build();
-
-            // Use Blazorise.
-            host.Services
-                .UseAntDesignProviders()
-                .UseFontAwesomeIcons();
-
             await host.RunAsync();
         }
     }

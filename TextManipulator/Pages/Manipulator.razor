@@ -2,56 +2,49 @@
 
 <h3>Manipulator</h3>
 
-<Field>
-    <MemoEdit Placeholder="Input" Rows="4" @bind-Text="@InputText" />
-</Field>
-
 <Form Model="@Model">
-    <Field>
-        <RadioGroup
-            TValue="TextCase"
-            Name="textCase"
-            Buttons="true"
-            @bind-CheckedValue="@Model.TextCase">
-            <Radio Value="@(TextCase.Unchanged)">Unchanged</Radio>
-            <Radio Value="@(TextCase.UpperCase)">UPPER CASE</Radio>
-            <Radio Value="@(TextCase.LowerCase)">lower case</Radio>
-            <Radio Value="@(TextCase.SentenceCase)">Sentence case</Radio>
-            <Radio Value="@(TextCase.TitleCase)">Title Case</Radio>
-            <Radio Value="@(TextCase.CamelCase)">camelCase</Radio>
-            <Radio Value="@(TextCase.PascalCase)">PascalCase</Radio>
-            <Radio Value="@(TextCase.SnakeCase)">snake_case</Radio>
-            <Radio Value="@(TextCase.KebabCase)">kebab-case</Radio>
-            <Radio Value="@(TextCase.RandomCase)">rAnDOm caSe</Radio>
+    <FormItem>
+        <TextArea Placeholder="Input" MinRows="4" MaxRows="4" @bind-Value="@InputText" />
+    </FormItem>
+
+    <FormItem>
+        <RadioGroup ButtonStyle="solid" @bind-Value="@Model.TextCase">
+            <Radio RadioButton Value="@TextCase.Unchanged">Unchanged</Radio>
+            <Radio RadioButton Value="@TextCase.UpperCase">UPPER CASE</Radio>
+            <Radio RadioButton Value="@TextCase.LowerCase">lower case</Radio>
+            <Radio RadioButton Value="@TextCase.SentenceCase">Sentence case</Radio>
+            <Radio RadioButton Value="@TextCase.TitleCase">Title Case</Radio>
+            <Radio RadioButton Value="@TextCase.CamelCase">camelCase</Radio>
+            <Radio RadioButton Value="@TextCase.PascalCase">PascalCase</Radio>
+            <Radio RadioButton Value="@TextCase.SnakeCase">snake_case</Radio>
+            <Radio RadioButton Value="@TextCase.KebabCase">kebab-case</Radio>
+            <Radio RadioButton Value="@TextCase.RandomCase">rAnDOm caSe</Radio>
         </RadioGroup>
-    </Field>
+    </FormItem>
 
-    <Field>
-        <Check TValue="bool" @bind-Checked="@Model.ClapItUp">
+    <FormItem>
+        <Checkbox Checked="@Model.ClapItUp">
             Clap 👏 it 👏 up!
-        </Check>
-    </Field>
+        </Checkbox>
+    </FormItem>
 
-    <Field Horizontal="true">
-        <FieldLabel>Character Limit</FieldLabel>
-        <FieldBody>
-            <NumericEdit Placeholder="No limit" TValue="int?" @bind-Value="@Model.CharLimit" />
-        </FieldBody>
-    </Field>
+    <FormItem Label="Character Limit">
+        <AntDesign.InputNumber Placeholder="No limit" @bind-Value="@Model.CharLimit" />
+    </FormItem>
 
-    <Field>
+    <FormItem>
         <Button
-            Color="Color.Primary"
-            Block="true"
-            Size="Size.Large"
-            Clicked="@Manipulate"
+            Type="primary"
+            Block
+            Size="large"
+            OnClick="@Manipulate"
             Disabled="@InputIsBlank"
             Loading="@Loading">
-            Manipulate
+            Transform
         </Button>
-    </Field>
-</Form>
+    </FormItem>
 
-<Field>
-    <MemoEdit Placeholder="Output" Rows="4" @bind-Text="@OutputText" />
-</Field>
+    <FormItem>
+        <TextArea Placeholder="Output" MinRows="4" MaxRows="4" @bind-Value="@OutputText" />
+    </FormItem>
+</Form>
