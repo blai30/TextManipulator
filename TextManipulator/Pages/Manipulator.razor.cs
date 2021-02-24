@@ -21,13 +21,17 @@ namespace TextManipulator.Pages
             }
 
             Loading = true;
-
             string input = InputText;
-            input = input.Trim();
 
-            // Shrink excess spaces.
-            var regex = new Regex(@"\s+");
-            input = regex.Replace(input, " ");
+            if (Model.TrimWhitespace)
+            {
+                // Trim trailing whitespace.
+                input = input.Trim();
+
+                // Shrink excess spaces between words.
+                var regex = new Regex(@"\s+");
+                input = regex.Replace(input, " ");
+            }
 
             if (Model.ClapItUp)
             {
@@ -84,6 +88,7 @@ namespace TextManipulator.Pages
     public class ManipulatorModel
     {
         public TextCase TextCase { get; set; } = TextCase.Unchanged;
+        public bool TrimWhitespace { get; set; } = false;
         public bool ClapItUp { get; set; } = false;
         public int? CharLimit { get; set; } = null;
     }

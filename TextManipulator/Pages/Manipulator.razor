@@ -23,6 +23,12 @@
     </FormItem>
 
     <FormItem>
+        <Checkbox @bind-Value="@Model.TrimWhitespace">
+            Trim whitespace
+        </Checkbox>
+    </FormItem>
+
+    <FormItem>
         <Checkbox @bind-Value="@Model.ClapItUp">
             Clap 👏 it 👏 up!
         </Checkbox>
