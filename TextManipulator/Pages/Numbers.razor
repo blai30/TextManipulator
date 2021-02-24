@@ -2,38 +2,34 @@
 
 <h3>Numbers</h3>
 
-<Field>
-    <NumericEdit Placeholder="Input" TValue="int?" @bind-Value="@InputNumber" />
-</Field>
-
 <Form Model="@Model">
-    <Field>
-        <RadioGroup
-            TValue="Notation"
-            Name="notation"
-            Buttons="true"
-            @bind-CheckedValue="@Model.Notation">
-            <Radio Value="@(Notation.Digits)">Digits</Radio>
-            <Radio Value="@(Notation.Words)">Words</Radio>
-            <Radio Value="@(Notation.OrdinalWords)">Ordinal Words</Radio>
-            <Radio Value="@(Notation.RomanNumerals)">Roman Numerals</Radio>
-            <Radio Value="@(Notation.Metrics)">Metrics</Radio>
-        </RadioGroup>
-    </Field>
+    <FormItem>
+        <Input Placeholder="Input" Size="large" @bind-Value="@InputNumber" />
+    </FormItem>
 
-    <Field>
+    <FormItem>
+        <RadioGroup ButtonStyle="solid" @bind-Value="@Model.Notation">
+            <Radio RadioButton Value="@Notation.Digits">Digits</Radio>
+            <Radio RadioButton Value="@Notation.Words">Words</Radio>
+            <Radio RadioButton Value="@Notation.OrdinalWords">Ordinal Words</Radio>
+            <Radio RadioButton Value="@Notation.RomanNumerals">Roman Numerals</Radio>
+            <Radio RadioButton Value="@Notation.Metrics">Metrics</Radio>
+        </RadioGroup>
+    </FormItem>
+
+    <FormItem>
         <Button
-            Color="Color.Primary"
-            Block="true"
-            Size="Size.Large"
-            Clicked="@Transform"
+            Type="primary"
+            Block
+            Size="large"
+            OnClick="@Transform"
             Disabled="@InputIsBlank"
             Loading="@Loading">
             Transform
         </Button>
-    </Field>
-</Form>
+    </FormItem>
 
-<Field>
-    <MemoEdit Placeholder="Output" Rows="4" @bind-Text="@OutputText" />
-</Field>
+    <FormItem>
+        <TextArea Placeholder="Output" MinRows="4" MaxRows="4" @bind-Value="@OutputText" />
+    </FormItem>
+</Form>
