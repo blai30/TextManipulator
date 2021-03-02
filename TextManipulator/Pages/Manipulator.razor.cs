@@ -88,7 +88,7 @@ namespace TextManipulator.Pages
     public class ManipulatorModel
     {
         public TextCase TextCase { get; set; } = TextCase.Unchanged;
-        public bool TrimWhitespace { get; set; } = false;
+        public bool TrimWhitespace { get; set; } = true;
         public bool ClapItUp { get; set; } = false;
         public int? CharLimit { get; set; } = null;
     }
